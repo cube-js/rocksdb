@@ -1052,6 +1052,10 @@ uint64_t rocksdb_get_latest_sequence_number (rocksdb_t *db) {
     return db->rep->GetLatestSequenceNumber();
 }
 
+uint64_t rocksdb_transactiondb_get_latest_sequence_number (rocksdb_transactiondb_t *db) {
+    return db->rep->GetLatestSequenceNumber();
+}
+
 rocksdb_iterator_t* rocksdb_create_iterator_cf(
     rocksdb_t* db,
     const rocksdb_readoptions_t* options,

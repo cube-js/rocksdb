@@ -447,6 +447,7 @@ extern ROCKSDB_LIBRARY_API unsigned char rocksdb_wal_iter_valid(
 extern ROCKSDB_LIBRARY_API void rocksdb_wal_iter_status (const rocksdb_wal_iterator_t* iter, char** errptr) ;
 extern ROCKSDB_LIBRARY_API rocksdb_writebatch_t* rocksdb_wal_iter_get_batch (const rocksdb_wal_iterator_t* iter, uint64_t* seq) ;
 extern ROCKSDB_LIBRARY_API uint64_t rocksdb_get_latest_sequence_number (rocksdb_t *db);
+extern ROCKSDB_LIBRARY_API uint64_t rocksdb_transactiondb_get_latest_sequence_number (rocksdb_transactiondb_t *db);
 extern ROCKSDB_LIBRARY_API void rocksdb_wal_iter_destroy (const rocksdb_wal_iterator_t* iter) ;
 
 /* Write batch */
