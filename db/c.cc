@@ -1021,6 +1021,23 @@ rocksdb_wal_iterator_t* rocksdb_get_updates_since(
   return result;
 }
 
+rocksdb_wal_iterator_t* rocksdb_transactiondb_get_updates_since(
+        rocksdb_transactiondb_t* db, uint64_t seq_number,
+        const rocksdb_wal_readoptions_t* options,
+        char** errptr) {
+  std::unique_ptr<TransactionLogIterator> iter;
+  TransactionLogIterator::ReadOptions ro;
+  if (options!=nullptr) {
+      ro = options->rep;
+  }
+  if (SaveError(errptr, db->rep->GetUpdatesSince(seq_number, &iter, ro))) {
+    return nullptr;
+  }
+  rocksdb_wal_iterator_t* result = new rocksdb_wal_iterator_t;
+  result->rep = iter.release();
+  return result;
+}
+
 void rocksdb_wal_iter_next(rocksdb_wal_iterator_t* iter) {
     iter->rep->Next();
 }

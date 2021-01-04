@@ -329,6 +329,12 @@ extern ROCKSDB_LIBRARY_API rocksdb_wal_iterator_t* rocksdb_get_updates_since(
         char** errptr
 );
 
+extern ROCKSDB_LIBRARY_API rocksdb_wal_iterator_t* rocksdb_transactiondb_get_updates_since(
+        rocksdb_transactiondb_t* db, uint64_t seq_number,
+        const rocksdb_wal_readoptions_t* options,
+        char** errptr
+);
+
 extern ROCKSDB_LIBRARY_API rocksdb_iterator_t* rocksdb_create_iterator_cf(
     rocksdb_t* db, const rocksdb_readoptions_t* options,
     rocksdb_column_family_handle_t* column_family);
