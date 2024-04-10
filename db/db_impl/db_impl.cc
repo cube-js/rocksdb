@@ -107,6 +107,7 @@
 #include "util/stop_watch.h"
 #include "util/string_util.h"
 #include "utilities/trace/replayer_impl.h"
+#include "port/jemalloc_helper.h"
 
 namespace ROCKSDB_NAMESPACE {
 
@@ -148,6 +149,12 @@ void DumpSupportInfo(Logger* logger) {
                    crc32c::IsFastCrc32Supported().c_str());
 
   ROCKS_LOG_HEADER(logger, "DMutex implementation: %s", DMutex::kName());
+
+#ifdef ROCKSDB_JEMALLOC
+  ROCKS_LOG_HEADER(logger, "Allocator: %s", HasJemalloc() ? "Jemalloc" : "System (jemalloc not detected)");
+#else
+  ROCKS_LOG_HEADER(logger, "Allocator: System");
+#endif
 }
 }  // namespace
 
